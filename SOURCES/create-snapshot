@@ -63,6 +63,10 @@ cleanup() {
 trap "cleanup" 0 1 2 3 9 11 13 15
 
 work_dir="$(mktemp -dt "$self.XXXXXXXXXX")"
+GIT_CONFIG="$work_dir"/.gitconfig
+export GIT_CONFIG
+git config --global user.name Builder
+git config --global user.email builder@example.com
 
 git_latest_tag() {
     git describe --abbrev=0
